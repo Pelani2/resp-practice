@@ -6,18 +6,23 @@ import { useMediaQuery } from 'react-responsive';
 import InputLocation from "../InputLocation";
 import Button from "../Button";
 
-const Location: React.FC = () => {
+interface LocationProps {
+    onCityChange: (city: string) => void;
+};
+
+const Location: React.FC<LocationProps> = ({ onCityChange }) => {
     const [inputLocation, setInputLocation] = useState("");
     const dispatch = useDispatch();
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         dispatch(setLocation(inputLocation));
+        onCityChange(inputLocation);
     };
 
     const isMobileDevice = useMediaQuery({
         maxDeviceWidth: 321,
-    })
+    });
 
     return (
         <StyledForm 

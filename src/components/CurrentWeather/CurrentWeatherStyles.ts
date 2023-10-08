@@ -14,7 +14,7 @@ export const StyledCurrentWeatherContainer = styled.div<CurrentWeatherProps>`
     color: #313131;
 
     ${(props) => props.isMobile && `
-        padding: 10px;
+        padding: 15px;
         grid-gap: 5px;
         justify-items: start;
         background: linear-gradient(135deg, #fddb92 0%, #d1fdff 100%);

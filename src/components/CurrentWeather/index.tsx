@@ -18,7 +18,11 @@ interface Weather {
     };
 }
 
-const CurrentWeather: React.FC = () => {
+interface CurrentWeatherProps {
+    city: string;
+}
+
+const CurrentWeather: React.FC<CurrentWeatherProps> = ({ city }) => {
     const [weather, setWeather] = useState<Weather | null>(null);
 
     const isMobileDevice = useMediaQuery({
@@ -28,7 +32,7 @@ const CurrentWeather: React.FC = () => {
     useEffect(() => {
         const fetchWeather = async () => {
           try {
-            const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=London&appid=a5c8d21f9b638584455bdbf88a13eb70`);
+            const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=a5c8d21f9b638584455bdbf88a13eb70`);
             setWeather(response.data);
           } catch (error) {
             console.error(error);
@@ -36,7 +40,7 @@ const CurrentWeather: React.FC = () => {
         };
     
         fetchWeather();
-    }, []);
+    }, [city]);
 
     console.log(weather);
 
