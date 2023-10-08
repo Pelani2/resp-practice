@@ -27,10 +27,12 @@ const Location: React.FC = () => {
             <InputLocation 
                 inputLocation={inputLocation}
                 setInputLocation={setInputLocation}
+                isMobile={isMobileDevice}
             />
             <Button
                 variant="location-button"
                 type="submit"
+                isMobile={isMobileDevice}
             >
                 Submit
             </Button>

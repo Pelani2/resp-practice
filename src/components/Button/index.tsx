@@ -12,9 +12,10 @@ interface ButtonProps {
     type?: ButtonType;
     children: React.ReactNode;
     style?: React.CSSProperties;
+    isMobile?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ type, children, variant, style }) => {
+const Button: React.FC<ButtonProps> = ({ type, children, variant, style, isMobile }) => {
     let StyledButton;
 
     switch(variant) {
@@ -29,6 +30,7 @@ const Button: React.FC<ButtonProps> = ({ type, children, variant, style }) => {
         <StyledButton 
             type={type || "submit"}
             style={style}
+            isMobile={isMobile}
         >
             {children}
         </StyledButton>
