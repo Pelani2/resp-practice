@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setLocation } from "../../redux/actions/locationSlice";
+import { StyledForm } from "./LocationStyles";
 
 const Location: React.FC = () => {
     const [inputLocation, setInputLocation] = useState("");
@@ -12,7 +13,7 @@ const Location: React.FC = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <StyledForm onSubmit={handleSubmit}>
             <input 
                 type="text"
                 value={inputLocation}
@@ -24,7 +25,7 @@ const Location: React.FC = () => {
             >
                 Submit
             </button>
-        </form>
+        </StyledForm>
     );
 };
 
