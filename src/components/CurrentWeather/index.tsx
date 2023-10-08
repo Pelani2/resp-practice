@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import Typography from "../Typography";
+import { StyledCurrentWeatherContainer } from "./CurrentWeatherStyles";
+import { useMediaQuery } from 'react-responsive';
 
 interface Weather {
     name: string;
@@ -18,6 +20,10 @@ interface Weather {
 
 const CurrentWeather: React.FC = () => {
     const [weather, setWeather] = useState<Weather | null>(null);
+
+    const isMobileDevice = useMediaQuery({
+        maxDeviceWidth: 321,
+    });
 
     useEffect(() => {
         const fetchWeather = async () => {
@@ -43,23 +49,38 @@ const CurrentWeather: React.FC = () => {
     }
 
     return (
-        <div>
-            <Typography variant="weather-title">
+        <StyledCurrentWeatherContainer isMobile={isMobileDevice}>
+            <Typography 
+                variant="weather-title" 
+                isMobile={isMobileDevice}
+            >
                 Current weather for: {weather.name}
             </Typography>
-            <Typography variant="weather-info">
+            <Typography 
+                variant="weather-info" 
+                isMobile={isMobileDevice}
+            >
                 Description: {weather.weather[0].description}
             </Typography>
-            <Typography variant="weather-info">Temperature: 
-                {weather.main.temp}
+            <Typography 
+                variant="weather-info" 
+                isMobile={isMobileDevice}
+            >
+                Temperature: {weather.main.temp}
             </Typography>
-            <Typography variant="weather-info">Humidity: 
-                {weather.main.humidity}
+            <Typography 
+                variant="weather-info" 
+                isMobile={isMobileDevice}
+            >
+                Humidity: {weather.main.humidity}
             </Typography>
-            <Typography variant="weather-info">
+            <Typography 
+                variant="weather-info" 
+                isMobile={isMobileDevice}
+            >
                 Wind: {weather.wind.speed} km/h
             </Typography>
-        </div>
+        </StyledCurrentWeatherContainer>
     );
 };
 

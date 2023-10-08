@@ -9,9 +9,10 @@ interface TypographyProps {
     variant: keyof typeof variantClassMap;
     children: React.ReactNode | string;
     style?: React.CSSProperties;
+    isMobile?: boolean;
 }
 
-const Typography: React.FC<TypographyProps> = ({ variant, children, style }) => {
+const Typography: React.FC<TypographyProps> = ({ variant, children, style, isMobile }) => {
     let StyledTypography;
 
     switch(variant) {
@@ -25,7 +26,10 @@ const Typography: React.FC<TypographyProps> = ({ variant, children, style }) => 
             return null;
     }
     return (
-        <StyledTypography>
+        <StyledTypography
+            style={style}
+            isMobile={isMobile}
+        >
             {children}
         </StyledTypography>
     );

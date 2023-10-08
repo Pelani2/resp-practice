@@ -17,7 +17,7 @@ const Location: React.FC = () => {
 
     const isMobileDevice = useMediaQuery({
         maxDeviceWidth: 321,
-    });
+    })
 
     return (
         <StyledForm 
