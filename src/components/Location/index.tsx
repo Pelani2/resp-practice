@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { setLocation } from "../../redux/actions/locationSlice";
 import { StyledForm } from "./LocationStyles";
 import InputLocation from "../InputLocation";
+import Button from "../Button";
 
 const Location: React.FC = () => {
     const [inputLocation, setInputLocation] = useState("");
@@ -19,11 +20,12 @@ const Location: React.FC = () => {
                 inputLocation={inputLocation}
                 setInputLocation={setInputLocation}
             />
-            <button
+            <Button
+                variant="location-button"
                 type="submit"
             >
                 Submit
-            </button>
+            </Button>
         </StyledForm>
     );
 };
