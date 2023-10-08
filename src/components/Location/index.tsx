@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setLocation } from "../../redux/actions/locationSlice";
 import { StyledForm } from "./LocationStyles";
+import { useMediaQuery } from 'react-responsive';
 import InputLocation from "../InputLocation";
 import Button from "../Button";
-import { useMediaQuery } from "react-responsive";
 
 const Location: React.FC = () => {
     const [inputLocation, setInputLocation] = useState("");
@@ -15,43 +15,25 @@ const Location: React.FC = () => {
         dispatch(setLocation(inputLocation));
     };
 
-    const isLargeScreen = useMediaQuery({
-        minWidth: 768,
+    const isMobileDevice = useMediaQuery({
+        maxDeviceWidth: 321
     });
 
     return (
-        <StyledForm onSubmit={handleSubmit}>
-            {isLargeScreen && (
-                <>
-                    <InputLocation 
-                        inputLocation={inputLocation}
-                        setInputLocation={setInputLocation}
-                        style={{ fontSize: "20px"}}
-                    />
-                    <Button
-                        variant="location-button"
-                        type="submit"
-                        style={{ fontSize: "20px"}}
-                    >
-                        Submit
-                    </Button>
-                </>
-            )}
-            
-            {!isLargeScreen && (
-                <>
-                    <InputLocation 
-                        inputLocation={inputLocation}
-                        setInputLocation={setInputLocation}
-                    />
-                    <Button
-                        variant="location-button"
-                        type="submit"
-                    >
-                        Submit
-                    </Button>
-                </>
-            )}
+        <StyledForm 
+            onSubmit={handleSubmit} 
+            isMobile={isMobileDevice}
+        >
+            <InputLocation 
+                inputLocation={inputLocation}
+                setInputLocation={setInputLocation}
+            />
+            <Button
+                variant="location-button"
+                type="submit"
+            >
+                Submit
+            </Button>
         </StyledForm>
     );
 };
