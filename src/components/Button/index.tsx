@@ -11,9 +11,10 @@ interface ButtonProps {
     variant: keyof typeof variantClassMap;
     type?: ButtonType;
     children: React.ReactNode;
+    style?: React.CSSProperties;
 }
 
-const Button: React.FC<ButtonProps> = ({ type, children, variant }) => {
+const Button: React.FC<ButtonProps> = ({ type, children, variant, style }) => {
     let StyledButton;
 
     switch(variant) {
@@ -27,6 +28,7 @@ const Button: React.FC<ButtonProps> = ({ type, children, variant }) => {
     return (
         <StyledButton 
             type={type || "submit"}
+            style={style}
         >
             {children}
         </StyledButton>
