@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setLocation } from "../../redux/actions/locationSlice";
 import { StyledForm } from "./LocationStyles";
+import InputLocation from "../InputLocation";
 
 const Location: React.FC = () => {
     const [inputLocation, setInputLocation] = useState("");
@@ -14,11 +15,9 @@ const Location: React.FC = () => {
 
     return (
         <StyledForm onSubmit={handleSubmit}>
-            <input 
-                type="text"
-                value={inputLocation}
-                onChange={(e) => setInputLocation(e.target.value)}
-                placeholder="Enter location"
+            <InputLocation 
+                inputLocation={inputLocation}
+                setInputLocation={setInputLocation}
             />
             <button
                 type="submit"
