@@ -3,6 +3,9 @@ import axios from 'axios';
 import Typography from "../Typography";
 import { StyledCurrentWeatherContainer } from "./CurrentWeatherStyles";
 import { useMediaQuery } from 'react-responsive';
+import { useDispatch, useSelector } from "react-redux";
+import { toTitleCase } from "../../redux/actions/utilsSlice";
+import { RootState } from "../../redux/store";
 
 interface Weather {
     name: string;
@@ -25,6 +28,10 @@ interface CurrentWeatherProps {
 const CurrentWeather: React.FC<CurrentWeatherProps> = ({ city }) => {
     const [weather, setWeather] = useState<Weather | null>(null);
 
+    const dispatch = useDispatch();
+
+    const titleCasedDescription = useSelector((state: RootState) => state.utils.titleCasedString);
+
     const isMobileDevice = useMediaQuery({
         maxDeviceWidth: 321,
     });
@@ -34,13 +41,14 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({ city }) => {
           try {
             const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`);
             setWeather(response.data);
+            dispatch(toTitleCase(response.data.weather[0].description));
           } catch (error) {
             console.error(error);
           }
         };
     
         fetchWeather();
-    }, [city]);
+    }, [city, dispatch]);
 
     console.log(weather);
 
@@ -64,7 +72,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({ city }) => {
                 variant="weather-info" 
                 isMobile={isMobileDevice}
             >
-                Description: {weather.weather[0].description}
+                Description: {titleCasedDescription}
             </Typography>
             <Typography 
                 variant="weather-info" 
@@ -76,7 +84,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({ city }) => {
                 variant="weather-info" 
                 isMobile={isMobileDevice}
             >
-                Humidity: {weather.main.humidity}
+                Humidity: {weather.main.humidity} %
             </Typography>
             <Typography 
                 variant="weather-info" 

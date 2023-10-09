@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import locationReducer from '../actions/locationSlice';
+import utilsReducer from '../actions/utilsSlice';
 
 export const store = configureStore({
     reducer: {
         location: locationReducer,
+        utils: utilsReducer,
     }
 });
 
