@@ -32,7 +32,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({ city }) => {
     useEffect(() => {
         const fetchWeather = async () => {
           try {
-            const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=a5c8d21f9b638584455bdbf88a13eb70`);
+            const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`);
             setWeather(response.data);
           } catch (error) {
             console.error(error);
@@ -70,7 +70,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({ city }) => {
                 variant="weather-info" 
                 isMobile={isMobileDevice}
             >
-                Temperature: {weather.main.temp}
+                Temperature: {Math.round((weather.main.temp - 273.15) * 100) / 100} °C
             </Typography>
             <Typography 
                 variant="weather-info" 
