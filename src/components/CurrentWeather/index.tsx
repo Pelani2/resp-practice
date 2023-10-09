@@ -6,11 +6,7 @@ import { useMediaQuery } from 'react-responsive';
 import { useDispatch, useSelector } from "react-redux";
 import { toTitleCase } from "../../redux/actions/utilsSlice";
 import { RootState } from "../../redux/store";
-import CloudIcon from "@mui/icons-material/Cloud";
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import { FaUmbrella } from "react-icons/fa";
-import { FaThermometerHalf } from "react-icons/fa";
-import { WiHumidity } from 'weather-icons-react';
+import { WiHumidity, WiStrongWind, WiThermometer, WiCloudy, WiRain, WiDaySunny } from 'weather-icons-react';
 
 interface Weather {
     name: string;
@@ -43,11 +39,11 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({ city }) => {
 
     const renderIcon = (titleCasedDescription: string) => {
         if (titleCasedDescription.includes("Cloud")) {
-            return <CloudIcon />;
+            return <WiCloudy />;
         } else if (titleCasedDescription.includes("Sun")) {
-            return <WbSunnyIcon />;
+            return <WiDaySunny />;
         } else if (titleCasedDescription.includes("Rain")) {
-            return <FaUmbrella />;
+            return <WiRain />;
         } else {
             return null;
         }
@@ -97,7 +93,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({ city }) => {
             </StyledWeatherInfoBox>
             
             <StyledWeatherInfoBox>
-                <FaThermometerHalf />
+                <WiThermometer />
                 <Typography 
                     variant="weather-info" 
                     isMobile={isMobileDevice}
@@ -117,6 +113,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({ city }) => {
             </StyledWeatherInfoBox>
             
             <StyledWeatherInfoBox>
+                <WiStrongWind />
                 <Typography 
                     variant="weather-info" 
                     isMobile={isMobileDevice}
