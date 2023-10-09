@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import Typography from "../Typography";
-import { StyledCurrentWeatherContainer } from "./CurrentWeatherStyles";
+import { StyledCurrentWeatherContainer, StyledWeatherInfoBox } from "./CurrentWeatherStyles";
 import { useMediaQuery } from 'react-responsive';
 import { useDispatch, useSelector } from "react-redux";
 import { toTitleCase } from "../../redux/actions/utilsSlice";
 import { RootState } from "../../redux/store";
+import CloudIcon from "@mui/icons-material/Cloud";
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import { FaUmbrella } from "react-icons/fa";
 
 interface Weather {
     name: string;
@@ -35,6 +38,18 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({ city }) => {
     const isMobileDevice = useMediaQuery({
         maxDeviceWidth: 321,
     });
+
+    const renderIcon = (titleCasedDescription: string) => {
+        if (titleCasedDescription.includes("Cloud")) {
+            return <CloudIcon />;
+        } else if (titleCasedDescription.includes("Sun")) {
+            return <WbSunnyIcon />;
+        } else if (titleCasedDescription.includes("Rain")) {
+            return <FaUmbrella />;
+        } else {
+            return null;
+        }
+    };
 
     useEffect(() => {
         const fetchWeather = async () => {
@@ -68,12 +83,17 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({ city }) => {
             >
                 Current weather for: {weather.name}
             </Typography>
-            <Typography 
-                variant="weather-info" 
-                isMobile={isMobileDevice}
-            >
-                Description: {titleCasedDescription}
-            </Typography>
+
+            <StyledWeatherInfoBox>
+                {renderIcon(titleCasedDescription)}
+                <Typography 
+                    variant="weather-info" 
+                    isMobile={isMobileDevice}
+                >
+                    {titleCasedDescription}
+                </Typography>
+            </StyledWeatherInfoBox>
+            
             <Typography 
                 variant="weather-info" 
                 isMobile={isMobileDevice}

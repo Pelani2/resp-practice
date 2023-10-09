@@ -21,3 +21,16 @@ export const StyledCurrentWeatherContainer = styled.div<CurrentWeatherProps>`
         color: #505050;
     `};
 `;
+
+export const StyledWeatherInfoBox = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #f0f8ff;
+    padding: 16px;
+    width: 150px;
+    height: 150px;
+`;
