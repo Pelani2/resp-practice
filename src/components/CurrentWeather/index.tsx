@@ -9,6 +9,8 @@ import { RootState } from "../../redux/store";
 import CloudIcon from "@mui/icons-material/Cloud";
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import { FaUmbrella } from "react-icons/fa";
+import { FaThermometerHalf } from "react-icons/fa";
+import { WiHumidity } from 'weather-icons-react';
 
 interface Weather {
     name: string;
@@ -94,24 +96,35 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({ city }) => {
                 </Typography>
             </StyledWeatherInfoBox>
             
-            <Typography 
-                variant="weather-info" 
-                isMobile={isMobileDevice}
-            >
-                Temperature: {Math.round((weather.main.temp - 273.15) * 100) / 100} °C
-            </Typography>
-            <Typography 
-                variant="weather-info" 
-                isMobile={isMobileDevice}
-            >
-                Humidity: {weather.main.humidity} %
-            </Typography>
-            <Typography 
-                variant="weather-info" 
-                isMobile={isMobileDevice}
-            >
-                Wind: {weather.wind.speed} km/h
-            </Typography>
+            <StyledWeatherInfoBox>
+                <FaThermometerHalf />
+                <Typography 
+                    variant="weather-info" 
+                    isMobile={isMobileDevice}
+                >
+                    {Math.round((weather.main.temp - 273.15) * 100) / 100} °C
+                </Typography>
+            </StyledWeatherInfoBox>
+
+            <StyledWeatherInfoBox>
+                <WiHumidity />
+                <Typography 
+                    variant="weather-info" 
+                    isMobile={isMobileDevice}
+                >
+                    {weather.main.humidity} %
+                </Typography>
+            </StyledWeatherInfoBox>
+            
+            <StyledWeatherInfoBox>
+                <Typography 
+                    variant="weather-info" 
+                    isMobile={isMobileDevice}
+                >
+                    {weather.wind.speed} km/h
+                </Typography>
+            </StyledWeatherInfoBox>
+            
         </StyledCurrentWeatherContainer>
     );
 };

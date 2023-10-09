@@ -23,14 +23,12 @@ export const StyledCurrentWeatherContainer = styled.div<CurrentWeatherProps>`
 `;
 
 export const StyledWeatherInfoBox = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    display: grid;
+    place-items: center;
+    text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    background-color: #f0f8ff;
-    padding: 16px;
+    background-image: linear-gradient(to right, #ff6a00, #ee0979);
+    padding: 20px;
     width: 150px;
-    height: 150px;
 `;
